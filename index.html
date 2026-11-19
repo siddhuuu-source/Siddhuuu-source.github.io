@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}</style>
+<title>Siddhu Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+  /* Layout: single left-aligned column, big name up top, project grid below. */
+  :root {
+    --bg: #f6f8fb;
+    --surface: #ffffff;
+    --fg: #0e1726;
+    --muted: #55617a;
+    --line: #dde3ee;
+    --accent: #1f5eff;
+    --accent-fg: #ffffff;
+    --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+    --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1020;
+      --surface: #131a2e;
+      --fg: #e6ebf5;
+      --muted: #93a0ba;
+      --line: #232c45;
+      --accent: #6d9bff;
+      --accent-fg: #0b1020;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1020;
+    --surface: #131a2e;
+    --fg: #e6ebf5;
+    --muted: #93a0ba;
+    --line: #232c45;
+    --accent: #6d9bff;
+    --accent-fg: #0b1020;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding-block: 20px;
+  }
+  .logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.01em;
+    color: var(--fg); text-decoration: none;
+  }
+  .logo .mark { flex: none; display: block; }
+  .logo .word { display: flex; flex-direction: column; line-height: 1.1; }
+  .logo .name { font-size: 1.25rem; letter-spacing: -0.01em; }
+  .logo .role { margin-top: 3px; font-family: var(--body); font-weight: 500; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .bar nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .bar nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+  .bar nav a:hover { color: var(--fg); }
+
+  .toggle {
+    font: inherit; font-size: 0.85rem; font-weight: 500;
+    background: var(--surface); color: var(--fg);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; cursor: pointer;
+  }
+  .toggle:hover { border-color: var(--accent); }
+
+  .hero { padding-block: 72px 56px; }
+  .eyebrow { color: var(--muted); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(2.4rem, 8vw, 4.6rem); font-weight: 700; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--accent); }
+  .hero .lead { max-width: 56ch; margin-top: 22px; color: var(--muted); font-size: 1.12rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    padding: 11px 20px; border-radius: 8px; border: 1px solid var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-fg); }
+  .btn.ghost { background: transparent; color: var(--accent); }
+  .btn:hover { filter: brightness(1.08); }
+
+  section { padding-block: 48px; border-top: 1px solid var(--line); }
+  section h2 { font-size: 1.6rem; margin-bottom: 18px; }
+  .about p { max-width: 62ch; color: var(--muted); }
+  .about p + p { margin-top: 14px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+  .tags li {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 12px; font-size: 0.9rem; font-weight: 500;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; min-width: 0; }
+  .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+  .card .stack { margin-top: 14px; font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+  .card.feature { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  .card.feature video { width: 220px; max-width: 100%; aspect-ratio: 9 / 16; background: #000; border-radius: 8px; flex: none; }
+  .card.feature .info { flex: 1 1 240px; min-width: 0; }
+  .note { margin-top: 16px; color: var(--muted); font-size: 0.85rem; }
+
+  .contact p { max-width: 56ch; color: var(--muted); }
+  .mail { display: inline-block; margin-top: 14px; font-family: var(--display); font-size: 1.25rem; font-weight: 700; color: var(--fg); overflow-wrap: anywhere; }
+
+  footer { padding-block: 36px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn, .toggle { transition: filter 0.15s ease, border-color 0.15s ease; }
+  }
+</style>
+
+<div class="wrap" id="top">
+  <header class="bar">
+    <a class="logo" href="#top" aria-label="Siddhu, back to top">
+      <svg class="mark" viewBox="0 0 48 48" width="42" height="42" role="img" aria-hidden="true">
+        <rect width="48" height="48" rx="12" fill="var(--fg)"/>
+        <path d="M34 15 C34 11 30 9 24 9 C17.5 9 13.5 12 13.5 16.5 C13.5 21.5 17.5 23 24 24.5 C30.5 26 34.5 27.5 34.5 32 C34.5 36.5 30.5 39 24 39 C18 39 14 37 13 33" fill="none" stroke="var(--bg)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="35" cy="15" r="3.4" fill="var(--accent)"/>
+      </svg>
+      <span class="word">
+        <span class="name">Siddhu</span>
+        <span class="role">Software Developer</span>
+      </span>
+    </a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="toggle" id="theme-toggle" type="button" aria-label="Switch between dark and light theme">Dark mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <p class="eyebrow">Software developer</p>
+      <h1>Hi, I'm <span>Siddhu.</span><br>I build things for the web.</h1>
+      <p class="lead">I like turning ideas into working apps, from the first line of code to the deployed site. This is my corner of the internet.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <section id="about" class="about">
+      <h2>About me</h2>
+      <p>I enjoy the software side of things: writing clean code, learning new tools and shipping small projects that actually work. Edit this text to tell visitors who you are and what you care about.</p>
+      <p>When I'm not coding, I'm usually exploring a new framework or improving an old project.</p>
+    </section>
+
+    <section id="skills">
+      <h2>What I work with</h2>
+      <ul class="tags">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Node.js</li>
+        <li>Git and GitHub</li>
+        <li>SQL</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card feature">
+          <video controls playsinline preload="metadata" src="vegetables.mp4" aria-label="Vegetables talking and playing, an 8 second video"></video>
+          <div class="info">
+            <h3>Vegetables talking and playing</h3>
+            <p>An 8 second animated video of vegetables chatting and playing together. Press play to watch it.</p>
+            <p class="stack">Video, AI animation</p>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Notes app</h3>
+          <p>A simple app to write, tag and search notes in one place.</p>
+          <p class="stack">JavaScript, Node.js</p>
+        </article>
+        <article class="card">
+          <h3>Dev log</h3>
+          <p>A daily log for what I built, what broke and what I learned.</p>
+          <p class="stack">HTML, CSS, JavaScript</p>
+        </article>
+        <article class="card">
+          <h3>Portfolio site</h3>
+          <p>This website, with a light and dark theme you can switch at the top.</p>
+          <p class="stack">HTML, CSS, JavaScript</p>
+        </article>
+      </div>
+      <p class="note">These three are sample projects. Replace them with your own work.</p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Want to work together or just say hi? Send me an email.</p>
+      <span class="mail">your-email@example.com</span>
+      <p class="note">Replace this with your real email address.</p>
+    </section>
+  </main>
+
+  <footer>Siddhu &middot; <span id="year"></span></footer>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("theme-toggle");
+    var KEY = "siddhu-theme";
+
+    function current() {
+      var set = root.getAttribute("data-theme");
+      if (set) return set;
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    function label() {
+      btn.textContent = current() === "dark" ? "Light mode" : "Dark mode";
+    }
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+    } catch (e) {}
+    label();
+
+    btn.addEventListener("click", function () {
+      var next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+      label();
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  })();
+</script>
+
+</html>
